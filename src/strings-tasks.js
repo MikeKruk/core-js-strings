@@ -147,7 +147,12 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const index = str.indexOf(value);
+  if (index !== -1) {
+    return str.substring(0, index) + str.substring(index + value.length);
+  }
+
+  return str;
 }
 
 /**
@@ -241,8 +246,8 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  const formatMinutes = `0${minutes}`.slice(-2);
-  const formatSeconds = `0${seconds}`.slice(-2);
+  const formatMinutes = minutes.toString().padStart(2, '0');
+  const formatSeconds = seconds.toString().padStart(2, '0');
   return `${formatMinutes}:${formatSeconds}`;
 }
 
